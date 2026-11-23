@@ -24,12 +24,12 @@ jobs:
 
       - name: Initialize & Validate Root Module
         run: |
-          terraform init -backend=false
+          terraform init -backend=false -upgrade
           terraform validate
 
       - name: Initialize & Validate Examples
         run: |
           for dir in $(find examples -mindepth 1 -maxdepth 1 -type d 2>/dev/null); do
             echo "Validating example: $dir..."
-            (cd "$dir" && terraform init -backend=false && terraform validate)
+            (cd "$dir" && terraform init -backend=false -upgrade && terraform validate)
           done
