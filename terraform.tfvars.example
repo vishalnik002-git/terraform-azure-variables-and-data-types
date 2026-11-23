@@ -1,0 +1,22 @@
+# Sample variable assignments demonstrating the Assign phase
+project_name            = "enterprise-cloud"
+instance_count          = 3
+enable_geo_replication  = true
+allowed_regions         = ["eastus", "centralindia", "westeurope"]
+unique_environment_tags = ["dev", "qa", "prod"]
+
+resource_tags = {
+  Environment = "Production"
+  Project     = "Terraform-IaC"
+}
+
+storage_profile = {
+  name        = "stsampleassign01"
+  tier        = "Standard"
+  replication = "LRS"
+}
+
+server_spec = ["Standard_D2s_v3", 4, false]
+
+resource_group_name = "rg-variables-demo"
+location            = "eastus"

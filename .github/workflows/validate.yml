@@ -1,0 +1,35 @@
+name: Terraform Validation CI
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  validate:
+    name: Lint & Validate HCL
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v3
+        with:
+          terraform_version: 1.8.0
+
+      - name: Terraform Format Check
+        run: terraform fmt -check -recursive
+
+      - name: Initialize & Validate Root Module
+        run: |
+          terraform init -backend=false
+          terraform validate
+
+      - name: Initialize & Validate Examples
+        run: |
+          for dir in $(find examples -mindepth 1 -maxdepth 1 -type d 2>/dev/null); do
+            echo "Validating example: $dir..."
+            (cd "$dir" && terraform init -backend=false && terraform validate)
+          done
