@@ -48,9 +48,9 @@ variable "resource_tags" {
 # ==========================================
 variable "storage_profile" {
   type = object({
-    name         = string
-    tier         = string
-    replication  = string
+    name        = string
+    tier        = string
+    replication = string
   })
   description = "An object grouping named typed attributes."
   default = {

@@ -1,8 +1,8 @@
 variable "vm_profile" {
   type = object({
-    sku      = string
-    disk_gb  = number
-    managed  = bool
+    sku     = string
+    disk_gb = number
+    managed = bool
   })
   default = {
     sku     = "Standard_B2s"
